@@ -12,9 +12,6 @@ using System.Windows.Shapes;
 
 namespace wpf_kajak_kenu
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         List<Kajak> kajakok = new();
@@ -22,9 +19,7 @@ namespace wpf_kajak_kenu
         {
             InitializeComponent();
 
-            using StreamReader sr = new StreamReader(
-                path: @"..\..\..\src\kolcsonzes.txt",
-                encoding: Encoding.UTF8);
+            using StreamReader sr = new StreamReader(@"..\..\..\src\kolcsonzes.txt", Encoding.UTF8);
             sr.ReadLine();
             while (!sr.EndOfStream)
             {
@@ -32,40 +27,46 @@ namespace wpf_kajak_kenu
             }
             sr.Close();
 
+            VizDataGrid.ItemsSource = kajakok;
 
-            KajakDataGrid.ItemsSource = kajakok;
-            
-         
+            for (int i = 0; i < 24; i++)
+                OraComboBox.Items.Add(i);
+
+            for (int i = 0; i < 60; i++)
+                PercComboBox.Items.Add(i);
+
+            OraComboBox.SelectedIndex = 0;
+            PercComboBox.SelectedIndex = 0;
+
+
         }
-        private void EllenorzesGomb_Click(object sender, RoutedEventArgs e)
+        private void Ellenoriz_Click(object sender, RoutedEventArgs e)
         {
-            // Feltételezve, hogy van két TextBox az órához és perchez (OraTextBox, PercTextBox)
-            if (int.TryParse(OraTextBox.Text, out int ora) && int.TryParse(PercTextBox.Text, out int perc))
-            {
-                List<string> vizenLevok = new List<string>();
+            int aktOra = (int)OraComboBox.SelectedItem;
+            int aktPerc = (int)PercComboBox.SelectedItem;
 
-                foreach (var kajak in kajakok)
+            var vizHajok = kajakok
+                .Where(k => k.Viz(aktOra, aktPerc))
+                .Select(k => new
                 {
-                    if (kajak.Viz(ora, perc))
-                    {
-                        vizenLevok.Add(kajak.Nev);
-                    }
-                }
+                    k.Nev,
+                    k.Azonosito,
+                    k.ElvitelOraja,
+                    k.ElvitelPerce,
+                    k.VisszahozatalOraja,
+                    k.VisszahozatalPerc,
+                    KolcsonzesHossza = k.KolcsonzesHossza()
+                })
+                .ToList();
 
-                if (vizenLevok.Count > 0)
-                {
-                    MessageBox.Show("Vizen lévő hajók:\n" + string.Join("\n", vizenLevok));
-                }
-                else
-                {
-                    MessageBox.Show("Ebben az időpontban egy hajó sincs vízen.");
-                }
-            }
-            else
+            if (vizHajok.Count == 0)
             {
-                MessageBox.Show("Hibás időpont formátum! Kérlek, adj meg egy érvényes órát és percet.");
+                MessageBox.Show("Nincs olyan hajó, ami a megadott időpontban vízen volt!", "Információ", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+
+            VizDataGrid.ItemsSource = vizHajok;
         }
+
 
 
 

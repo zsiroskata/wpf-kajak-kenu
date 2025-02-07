@@ -7,19 +7,27 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid Name="KajakDataGrid" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" Height="200" Margin="50,50,0,0" VerticalAlignment="Top" Width="600">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="50,24,0,362">
+            <TextBlock Text="Óra:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+            <ComboBox Name="OraComboBox" Width="50"/>
+
+            <TextBlock Text="Perc:" VerticalAlignment="Center" Margin="10,0,5,0"/>
+            <ComboBox Name="PercComboBox" Width="50"/>
+
+            <Button Content="Ellenőriz" Click="Ellenoriz_Click" Margin="10,0,0,0"/>
+        </StackPanel>
+
+        <DataGrid Name="VizDataGrid" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Center" Height="200" VerticalAlignment="Center" Width="700">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Név" Binding="{Binding Nev}"/>
                 <DataGridTextColumn Header="Azonosító" Binding="{Binding Azonosito}"/>
-                <DataGridTextColumn Header="Típus" Binding="{Binding Tipus}"/>
-                <DataGridTextColumn Header="Személyek Száma" Binding="{Binding SzemelyekSzama}"/>
-                <DataGridTextColumn Header="Elvitel Időpontja" Binding="{Binding ElvitelIdo}" />
-                <DataGridTextColumn Header="Visszahozatal Időpontja" Binding="{Binding VisszahozatalIdo}" />
+                <DataGridTextColumn Header="Elvitel Időpontja" Binding="{Binding ElvitelOraja}" />
+                <DataGridTextColumn Header="Elvitel Perce" Binding="{Binding ElvitelPerce}" />
+                <DataGridTextColumn Header="Visszahozatal Időpontja" Binding="{Binding VisszahozatalOraja}" />
+                <DataGridTextColumn Header="Visszahozatal Perce" Binding="{Binding VisszahozatalPerc}" />
+                <DataGridTextColumn Header="Kölcsönzési ideje percben" Binding="{Binding KolcsonzesHossza}"/>
             </DataGrid.Columns>
         </DataGrid>
-
-
-
 
 
     </Grid>

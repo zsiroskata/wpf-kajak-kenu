@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Automation;
 
 namespace wpf_kajak_kenu
 {
@@ -29,17 +30,26 @@ namespace wpf_kajak_kenu
             VisszahozatalOraja = int.Parse(s[6]);
             VisszahozatalPerc = int.Parse(s[7]);
         }
-        //nem jo
+
         public bool Viz(int aktOra, int aktPerc)
         {
             int aktPercekben = aktOra * 60 + aktPerc;
             int elvitelPercekben = ElvitelOraja * 60 + ElvitelPerce;
             int visszahozatalPercekben = VisszahozatalOraja * 60 + VisszahozatalPerc;
-
-          
             return aktPercekben >= elvitelPercekben + 1 && aktPercekben <= visszahozatalPercekben;
         }
 
 
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        public int KolcsonzesHossza()
+        {
+            int elvitelPercekben = ElvitelOraja * 60 + ElvitelPerce;
+            int visszahozatalPercekben = VisszahozatalOraja * 60 + VisszahozatalPerc;
+            return visszahozatalPercekben - elvitelPercekben;
+        }
     }
 }
