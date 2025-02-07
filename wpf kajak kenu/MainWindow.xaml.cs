@@ -19,7 +19,10 @@ namespace wpf_kajak_kenu
         {
             InitializeComponent();
 
-            using StreamReader sr = new StreamReader(@"..\..\..\src\kolcsonzes.txt", Encoding.UTF8);
+            using StreamReader sr = new StreamReader(
+                path: @"..\..\..\src\kolcsonzes.txt",
+                Encoding.UTF8);
+
             sr.ReadLine();
             while (!sr.EndOfStream)
             {
@@ -58,7 +61,7 @@ namespace wpf_kajak_kenu
                     x.ElvitelPerce,
                     x.VisszahozatalOraja,
                     x.VisszahozatalPerc,
-                    KolcsonzesHossza = x.KolcsonzesHossza()
+                    KolcsonzesHossza = x.Kolcsonzes()
                 }).ToList();
 
             if (vizHajok.Count == 0)
@@ -69,7 +72,32 @@ namespace wpf_kajak_kenu
             VizDataGrid.ItemsSource = vizHajok;
         }
 
+        private void BevetelButton_Click(object sender, RoutedEventArgs e)
+        {
+            BevetelLabel.Content = $"Bevétel: {NapiBevetel()} Ft";
+        }
 
+        private int NapiBevetel()
+        {
+            int osszeg = 0;
+            foreach (var kajak in kajakok)
+            {
+                osszeg += kajak.FelOrakSzama() * 1500;
+            }
+            return osszeg;
+        }
+
+        private void UjHajo(Kajak ujHajo)
+        {
+            if (ujHajo.ErvenyesHajo(kajakok))
+            {
+                MessageBox.Show("Ez a hajó érvényes és már szerepel az adatbázisban!", "Érvényes hajó", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Ez a hajó nem létezik az adatbázisban!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
 
 

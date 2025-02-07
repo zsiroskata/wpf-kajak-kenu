@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Automation;
 
 namespace wpf_kajak_kenu
@@ -38,24 +39,28 @@ namespace wpf_kajak_kenu
             int visszahozatalPercekben = VisszahozatalOraja * 60 + VisszahozatalPerc;
             return aktPercekben >= elvitelPercekben + 1 && aktPercekben <= visszahozatalPercekben;
         }
-
-        public int FelOrakSzama()
-        {
-            int percek = KolcsonzesHossza();
-            return (percek + 29) / 30; 
-        }
-
-        public override string ToString()
-        {
-            return $"{Azonosito}\t{KolcsonzesHossza()} perc\t{FelOrakSzama()} félóra";
-        }
-
-
-        public int KolcsonzesHossza()
+        public int Kolcsonzes()
         {
             int elvitelPercekben = ElvitelOraja * 60 + ElvitelPerce;
             int visszahozatalPercekben = VisszahozatalOraja * 60 + VisszahozatalPerc;
             return visszahozatalPercekben - elvitelPercekben;
         }
+        public int FelOrakSzama()
+        {
+            int percek = Kolcsonzes();
+            return (percek + 29) / 30;
+        }
+
+        public override string ToString()
+        {
+            return $"{Azonosito}\t{Kolcsonzes()} perc\t{FelOrakSzama()} félóra";
+        }
+        public bool ErvenyesHajo(List<Kajak> hajok)
+        {
+            return hajok.Any(x => x.Azonosito == this.Azonosito && x.Tipus == this.Tipus && x.SzemelyekSzama == this.SzemelyekSzama);
+        }
+
+        
+
     }
 }
