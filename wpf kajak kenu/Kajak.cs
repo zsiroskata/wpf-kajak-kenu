@@ -39,11 +39,17 @@ namespace wpf_kajak_kenu
             return aktPercekben >= elvitelPercekben + 1 && aktPercekben <= visszahozatalPercekben;
         }
 
+        public int FelOrakSzama()
+        {
+            int percek = KolcsonzesHossza();
+            return (percek + 29) / 30; 
+        }
 
         public override string ToString()
         {
-            return base.ToString();
+            return $"{Azonosito}\t{KolcsonzesHossza()} perc\t{FelOrakSzama()} félóra";
         }
+
 
         public int KolcsonzesHossza()
         {

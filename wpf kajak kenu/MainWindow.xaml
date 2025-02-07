@@ -17,7 +17,7 @@
             <Button Content="Ellenőriz" Click="Ellenoriz_Click" Margin="10,0,0,0"/>
         </StackPanel>
 
-        <DataGrid Name="VizDataGrid" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Center" Height="200" VerticalAlignment="Center" Width="700">
+        <DataGrid Name="VizDataGrid" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" Height="200" VerticalAlignment="Center" Width="444" Margin="50,0,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Név" Binding="{Binding Nev}"/>
                 <DataGridTextColumn Header="Azonosító" Binding="{Binding Azonosito}"/>
@@ -28,6 +28,7 @@
                 <DataGridTextColumn Header="Kölcsönzési ideje percben" Binding="{Binding KolcsonzesHossza}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <ListBox Name="felorasok" Margin="540,117,10,217"/>
 
 
     </Grid>

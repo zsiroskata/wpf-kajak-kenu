@@ -38,6 +38,10 @@ namespace wpf_kajak_kenu
             OraComboBox.SelectedIndex = 0;
             PercComboBox.SelectedIndex = 0;
 
+            foreach (var item in kajakok)
+            {
+                felorasok.Items.Add(item.ToString());
+            }
 
         }
         private void Ellenoriz_Click(object sender, RoutedEventArgs e)
@@ -45,19 +49,17 @@ namespace wpf_kajak_kenu
             int aktOra = (int)OraComboBox.SelectedItem;
             int aktPerc = (int)PercComboBox.SelectedItem;
 
-            var vizHajok = kajakok
-                .Where(k => k.Viz(aktOra, aktPerc))
-                .Select(k => new
+            var vizHajok = kajakok.Where(x => x.Viz(aktOra, aktPerc))
+                .Select(x => new
                 {
-                    k.Nev,
-                    k.Azonosito,
-                    k.ElvitelOraja,
-                    k.ElvitelPerce,
-                    k.VisszahozatalOraja,
-                    k.VisszahozatalPerc,
-                    KolcsonzesHossza = k.KolcsonzesHossza()
-                })
-                .ToList();
+                    x.Nev,
+                    x.Azonosito,
+                    x.ElvitelOraja,
+                    x.ElvitelPerce,
+                    x.VisszahozatalOraja,
+                    x.VisszahozatalPerc,
+                    KolcsonzesHossza = x.KolcsonzesHossza()
+                }).ToList();
 
             if (vizHajok.Count == 0)
             {
