@@ -17,7 +17,23 @@
             <Button Content="Ellenőriz" Click="Ellenoriz_Click" Margin="10,0,0,0"/>
         </StackPanel>
 
-        <DataGrid Name="VizDataGrid" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" Height="200" VerticalAlignment="Center" Width="444" Margin="50,0,0,0">
+        <DataGrid Name="VizDataGrid" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="444" Margin="29,149,0,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Név" Binding="{Binding Nev}"/>
+                <DataGridTextColumn Header="Azonosító" Binding="{Binding Azonosito}"/>
+                <DataGridTextColumn Header="Típus" Binding="{Binding Tipus}"/>
+                <DataGridTextColumn Header="Személyek száma" Binding="{Binding SzemelyekSzama}"/>
+                <DataGridTextColumn Header="Elvitel Időpontja" Binding="{Binding ElvitelOraja}" />
+                <DataGridTextColumn Header="Elvitel Perce" Binding="{Binding ElvitelPerce}" />
+                <DataGridTextColumn Header="Visszahozatal Időpontja" Binding="{Binding VisszahozatalOraja}" />
+                <DataGridTextColumn Header="Visszahozatal Perce" Binding="{Binding VisszahozatalPerc}" />
+                <DataGridTextColumn Header="Kölcsönzési ideje percben" Binding="{Binding KolcsonzesHossza}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <ListBox Name="felorasok" Margin="540,188,10,146"/>
+        <Button Name="BevetelButton" Content="Napi Bevétel" Click="BevetelButton_Click" HorizontalAlignment="Left" Margin="50,370,0,0" VerticalAlignment="Top" Width="150"/>
+        <Label Name="BevetelLabel" Content="Bevétel: 0 Ft" HorizontalAlignment="Left" Margin="247,366,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <DataGrid x:Name="VizDataGrid2" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" Height="111" VerticalAlignment="Top" Width="444" Margin="346,17,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Név" Binding="{Binding Nev}"/>
                 <DataGridTextColumn Header="Azonosító" Binding="{Binding Azonosito}"/>
@@ -28,11 +44,7 @@
                 <DataGridTextColumn Header="Kölcsönzési ideje percben" Binding="{Binding KolcsonzesHossza}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <ListBox Name="felorasok" Margin="540,117,10,217"/>
-        <Button Name="BevetelButton" Content="Napi Bevétel" Click="BevetelButton_Click" HorizontalAlignment="Left" Margin="50,370,0,0" VerticalAlignment="Top" Width="150"/>
-        <Label Name="BevetelLabel" Content="Bevétel: 0 Ft" HorizontalAlignment="Left" Margin="247,366,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox x:Name="nevTextB" HorizontalAlignment="Left" Height="35" Margin="540,245,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="107"/>
-        <ComboBox x:Name="ListaComboBox" HorizontalAlignment="Left" Height="36" Margin="540,301,0,0" VerticalAlignment="Top" Width="158"/>
+        <Button x:Name="button" Content="új ablak" HorizontalAlignment="Left" Height="34" Margin="626,315,0,0" VerticalAlignment="Top" Width="112" Click="Button_Click"/>
 
 
     </Grid>

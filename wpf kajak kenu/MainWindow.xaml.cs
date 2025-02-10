@@ -14,7 +14,7 @@ namespace wpf_kajak_kenu
 {
     public partial class MainWindow : Window
     {
-        List<Kajak> kajakok = new();
+       List<Kajak> kajakok = new();
         public MainWindow()
         {
             InitializeComponent();
@@ -31,6 +31,7 @@ namespace wpf_kajak_kenu
             sr.Close();
 
             VizDataGrid.ItemsSource = kajakok;
+            
 
             for (int i = 0; i < 24; i++)
                 OraComboBox.Items.Add(i);
@@ -57,6 +58,8 @@ namespace wpf_kajak_kenu
                 {
                     x.Nev,
                     x.Azonosito,
+                    x.Tipus,
+                    x.SzemelyekSzama,
                     x.ElvitelOraja,
                     x.ElvitelPerce,
                     x.VisszahozatalOraja,
@@ -69,14 +72,8 @@ namespace wpf_kajak_kenu
                 MessageBox.Show("Nincs olyan hajó, ami a megadott időpontban vízen volt!", "Információ", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
-            VizDataGrid.ItemsSource = vizHajok;
+            VizDataGrid2.ItemsSource = vizHajok;
         }
-
-        private void BevetelButton_Click(object sender, RoutedEventArgs e)
-        {
-            BevetelLabel.Content = $"Bevétel: {NapiBevetel()} Ft";
-        }
-
         private int NapiBevetel()
         {
             int osszeg = 0;
@@ -85,6 +82,11 @@ namespace wpf_kajak_kenu
                 osszeg += kajak.FelOrakSzama() * 1500;
             }
             return osszeg;
+        }
+
+        private void BevetelButton_Click(object sender, RoutedEventArgs e)
+        {
+            BevetelLabel.Content = $"Bevétel: {NapiBevetel()} Ft";
         }
 
         private void UjHajo(Kajak ujHajo)
@@ -99,7 +101,10 @@ namespace wpf_kajak_kenu
             }
         }
 
-
-
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Window1 p = new Window1();
+            p.Show();
+        }
     }
 }
